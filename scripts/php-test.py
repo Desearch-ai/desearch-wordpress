@@ -13,6 +13,6 @@ subprocess.run(['docker', 'cp', str(root/'tests'), 't1124-wp:/tmp/desearch-tests
 args = ['docker', 'exec', '--user', 'www-data']
 if 'DESEARCH_API_KEY' in os.environ:
     args += ['-e', 'DESEARCH_API_KEY']
-code = '$_SERVER["HTTP_HOST"] = "127.0.0.1:18824"; $_SERVER["REMOTE_ADDR"] = "127.0.0.1"; $_SERVER["REQUEST_URI"] = "/"; define("WP_ADMIN", true); require "/var/www/html/wp-load.php"; require "/var/www/html/wp-admin/includes/admin.php"; require $argv[1];'
+code = '$_SERVER["HTTP_HOST"] = "127.0.0.1:18824"; $_SERVER["REMOTE_ADDR"] = "127.0.0.1"; $_SERVER["REQUEST_URI"] = "/wp-admin/tools.php?page=desearch"; $_SERVER["SCRIPT_FILENAME"] = "/var/www/html/wp-admin/tools.php"; $_SERVER["PHP_SELF"] = "/wp-admin/tools.php"; define("WP_ADMIN", true); require "/var/www/html/wp-load.php"; require "/var/www/html/wp-admin/includes/admin.php"; require $argv[1];'
 args += ['t1124-wp', 'php', '-r', code, '/tmp/desearch-tests/'+test]
 raise SystemExit(subprocess.call(args))

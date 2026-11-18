@@ -50,4 +50,4 @@ python3 scripts/wp-test.py plugin activate desearch --network
 python3 scripts/php-test.py multisite.php
 ```
 
-The network test invokes the packaged uninstall entry point with WordPress's uninstall constant, checks two sites' keys are removed, and preserves unrelated options. It does not test networks larger than 100 sites or network browser routing. Remove only the task's own disposable Docker resources when done. Deactivation keeps the key; uninstall removes it.
+The network test invokes the packaged uninstall entry point with WordPress's uninstall constant, checks two sites' keys are removed, and preserves unrelated options. A separate check also passed through `wp plugin deactivate desearch --network` followed by `wp plugin uninstall desearch`, with dummy keys on both sites. Networks larger than 100 sites and network browser routing were not tested. Remove only the task's own disposable Docker resources when done. Deactivation keeps the key; uninstall removes it.
